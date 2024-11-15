@@ -1,6 +1,7 @@
 @extends('layouts.master');
 
 @section('content')
-Pantalla principal
+
+Bienvenido a la pantalla principal.
 
 @endsection
