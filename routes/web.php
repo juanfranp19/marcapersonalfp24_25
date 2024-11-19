@@ -1,11 +1,17 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProyectosController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
+Route::get('/', [HomeController::class, 'getHome'])
+    ->name('home');
+/*
 Route::get('/', function () {
     return view('home');
 });
+*/
 
 Route::get('login', function() {
     return view('auth.login');
@@ -15,13 +21,21 @@ Route::get('logout', function() {
     return 'Logout usuario';
 });
 
+Route::get('proyectos', [ProyectosController::class, 'getIndex']);
+/*
 Route::get('proyectos', function() {
     return view('proyectos.index');
 });
+*/
 
+
+Route::get('proyectos/show/{id}', [ProyectosController::class, 'getShow'])
+->where('id', '[0-9]+');
+/*
 Route::get('proyectos/show/{id}', function($id) {
     return view('proyectos.show', array('id'=>$id));
 })->where('id', '[0-9]+');
+*/
 
 Route::get('proyectos/create', function() {
     return view('proyectos.create');
