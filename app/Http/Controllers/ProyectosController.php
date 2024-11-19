@@ -16,7 +16,7 @@ class ProyectosController extends Controller
     public function getShow($id)
     {
         return view('proyectos.show')
-            ->with('proyecto', self::$arrayProyectos[$id])
+            ->with('proyecto', $this->arrayProyectos[$id])
             ->with('id', $id);
     }
 
