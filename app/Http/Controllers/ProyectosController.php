@@ -6,6 +6,18 @@ use Illuminate\Http\Request;
 
 class ProyectosController extends Controller
 {
+    public function getCreate()
+    {
+        return view('proyectos.create');
+    }
+
+    public function getEdit($id)
+    {
+        return view('proyectos.edit')
+            ->with('proyectos', $this->arrayProyectos[$id])
+            ->with('id', $id);
+    }
+
     public function getIndex()
     {
         return view('proyectos.index',
