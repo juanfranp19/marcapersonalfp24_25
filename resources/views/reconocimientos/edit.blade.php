@@ -15,35 +15,34 @@
 	            @csrf
 
 	            <div class="form-group">
-	               <label for="estudiante_id">Estudiante ID</label>
+	               <label for="estudiante_id">Estudiante</label>
 	               <input type="text" name="estudiante_id" id="estudiante_id" class="form-control" value="{{ $reconocimiento['estudiante_id'] }}">
 	            </div>
 
 	            <div class="form-group">
-	               <label for="docente_id">Docente</label>
-	               <input type="number" name="docente_id" id="docente_id"  value="{{ $proyecto['docente_id'] }}">
+	               <label for="actividad_id">Actividad</label>
+	               <input type="number" name="actividad_id" id="actividad_id"  value="{{ $reconocimiento['actividad_id'] }}">
 	            </div>
 
 	            <div class="form-group">
-	               <label for="dominio">Dominio</label><br />
+	               <label for="documento">Documento</label><br />
                     https://github.com/2DAW-CarlosIII/
-	               <input type="text" name="dominio" id="dominio" class="form-control" value="{{ $proyecto['dominio'] }}">
+	               <input type="text" name="documento" id="documento" class="form-control" value="{{ $reconocimiento['documento'] }}">
 	            </div>
 
-	            <div class="form-group">
-	               <label for="metadatos">Metadatos</label>
-	               <textarea name="metadatos" id="metadatos" class="form-control" rows="3">
-@foreach ($proyecto['metadatos'] as $clave => $metadato)
-{{ $clave }}: {{ $metadato }}
-@endforeach
-                    </textarea>
-                   <br /><small>Cada metadato irá separado del siguiente por una línea <br />
-                   y la clave irá separada por : del valor</small>
-	            </div>
+                <div class="form-group">
+                    <label for="fecha">Fecha</label><br />
+                    <input type="date" name="fecha" id="fecha" class="form-control" value="{{ $reconocimiento['fecha'] }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="docente_validador">Docente validador</label>
+                    <input type="docente_validador" name="docente_validador" id="docente_validador"  value="{{ $reconocimiento['docente_validador'] }}">
+                </div>
 
 	            <div class="form-group text-center">
 	               <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
-	                   Modificar proyecto
+	                   Modificar reconocimiento
 	               </button>
 	            </div>
 
