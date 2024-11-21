@@ -16,7 +16,7 @@
 
 	            <div class="form-group">
 	               <label for="estudiante_id">Estudiante</label>
-	               <input type="text" name="estudiante_id" id="estudiante_id" class="form-control" value="{{ $reconocimiento['estudiante_id'] }}">
+	               <input type="number" name="estudiante_id" id="estudiante_id" class="form-control" value="{{ $reconocimiento['estudiante_id'] }}">
 	            </div>
 
 	            <div class="form-group">
@@ -25,24 +25,23 @@
 	            </div>
 
 	            <div class="form-group">
-	               <label for="documento">Documento</label><br />
-                    https://github.com/2DAW-CarlosIII/
-	               <input type="text" name="documento" id="documento" class="form-control" value="{{ $reconocimiento['documento'] }}">
+	               <label for="documento">URL del documento</label>
+	               <input type="url" name="documento" id="documento" class="form-control" value="{{ $reconocimiento['documento'] }}">
 	            </div>
 
                 <div class="form-group">
-                    <label for="fecha">Fecha</label><br />
+                    <label for="fecha">Fecha</label>
                     <input type="date" name="fecha" id="fecha" class="form-control" value="{{ $reconocimiento['fecha'] }}">
                 </div>
 
                 <div class="form-group">
-                    <label for="docente_validador">Docente validador</label>
-                    <input type="docente_validador" name="docente_validador" id="docente_validador"  value="{{ $reconocimiento['docente_validador'] }}">
+                    <label for="docente_validador">Docente Validador</label>
+                    <input type="number" name="docente_validador" id="docente_validador"  value="{{ $reconocimiento['docente_validador'] }}">
                 </div>
 
 	            <div class="form-group text-center">
 	               <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
-	                   Modificar reconocimiento
+	                   Modificar Reconocimiento
 	               </button>
 	            </div>
 
