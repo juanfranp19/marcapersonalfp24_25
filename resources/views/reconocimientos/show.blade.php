@@ -22,6 +22,15 @@
             <h4><strong>Docente validador: </strong>{{ $reconocimiento['docente_validador'] }}</h4>
             <h4><strong>Fecha: </strong>{{ $reconocimiento['fecha'] }}</h4>
 
+
+            <a class="btn btn-warning" href="{{ action([App\Http\Controllers\ReconocimientoController::class, 'getEdit'], ['id' => $id]) }}">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                Editar reconocimiento
+            </a>
+            <a class="btn btn-outline-info" href="{{ action([App\Http\Controllers\ReconocimientoController::class, 'getIndex']) }}">
+                Volver al listado
+            </a>
+
         </div>
     </div>
 
