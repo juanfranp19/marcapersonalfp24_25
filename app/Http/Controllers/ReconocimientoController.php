@@ -1,12 +1,34 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 
 class ReconocimientoController extends Controller
 {
+    public function getIndex()
+    {
+        return view('reconocimientos.index')
+            ->with('reconocimientos', $this->arrayReconocimientos);
+    }
 
+    function getShow($id)
+    {
+        return view('reconocimientos.show')
+            ->with('reconocimiento', $this->arrayReconocimientos[$id])
+            ->with('id', $id);
+    }
+
+    function getCreate()
+    {
+        return view('reconocimientos.create');
+    }
+
+    function getEdit($id)
+    {
+        return view('reconocimientos.edit')
+            ->with('reconocimiento', $this->arrayReconocimientos[$id])
+            ->with('id', $id);
+    }
 
     private $arrayReconocimientos = [
         [

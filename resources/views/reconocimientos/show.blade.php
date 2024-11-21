@@ -1,3 +1,28 @@
-<div>
-    <!-- Life is available only in the present moment. - Thich Nhat Hanh -->
-</div>
+@extends('layouts.master')
+
+@section('content')
+
+
+    <div class="row m-4">
+
+        <div class="col-sm-4">
+
+            <img width="256" alt="Award icon" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Award_icon.png">
+
+        </div>
+        <div class="col-sm-8">
+
+            <h3><strong>Estudiante</strong>{{ $reconocimiento['estudiante_id'] }}</h3>
+            <h4><strong>Documento: </strong>
+                <a href="http://github.com/2DAW-CarlosIII/{{ $reconocimiento['documento'] }}">
+                    http://github.com/2DAW-CarlosIII/{{ $reconocimiento['documento'] }}
+                </a>
+            </h4>
+            <h4><strong>Actividad: </strong>{{ $reconocimiento['actividad_id'] }}</h4>
+            <h4><strong>Docente validador: </strong>{{ $reconocimiento['docente_validador'] }}</h4>
+            <h4><strong>Fecha: </strong>{{ $reconocimiento['fecha'] }}</h4>
+
+        </div>
+    </div>
+
+@endsection
