@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class ControllersExerciseTest extends TestCase
+class CurriculoControllerTest extends TestCase
 {
     public function test_controladores(): void
     {
@@ -39,69 +39,69 @@ class ControllersExerciseTest extends TestCase
             $response->assertStatus(200)->assertSeeText($value, $escaped = true);
 
         /**
-         * proyectos index test.
+         * curriculos index test.
          */
-            $response = $this->get('/proyectos');
-            $nombres = [
-                'Tecnologías de la Información',
-                'Diseño Gráfico',
-                'Electrónica',
-                'Ingeniería Civil',
-                'Gastronomía',
-                'Medicina',
-                'Mecatrónica',
-                'Arquitectura',
-                'Automoción',
-                'Turismo',
+            $response = $this->get('/curriculos');
+            $texto_curriculum = [
+                "Experiencia en desarrollo web con enfoque en tecnologías front-end.",
+                "Habilidades avanzadas en HTML, CSS y JavaScript.",
+                "Amplia experiencia en el diseño y desarrollo de interfaces de usuario.",
+                "Conocimientos sólidos en frameworks front-end como React y Vue.",
+                "Experiencia en integración de API y consumo de servicios web.",
+                "Habilidades de resolución de problemas y pensamiento lógico.",
+                "Colaborador proactivo y eficiente en entornos de trabajo en equipo.",
+                "Capacidad para aprender rápidamente nuevas tecnologías y conceptos.",
+                "Comprometido con la mejora continua y el desarrollo profesional.",
+                "Comunicación efectiva y habilidades interpersonales.",
             ];
 
             $response
             ->assertStatus(200)
-            ->assertViewIs('proyectos.index')
-            ->assertSeeTextInOrder($nombres, $escaped = true);
+            ->assertViewIs('curriculos.index')
+            ->assertSeeTextInOrder($texto_curriculum, $escaped = true);
 
         /**
-         * proyectos show test.
+         * curriculos show test.
          */
-            $response = $this->get("/proyectos/show/1");
+            $response = $this->get("/curriculos/show/0");
 
             $response
             ->assertStatus(200)
-            ->assertViewIs('proyectos.show')
-            ->assertSeeText('Diseño Gráfico', $escaped = true);
+            ->assertViewIs('curriculos.show')
+            ->assertSeeText("Experiencia en desarrollo web con enfoque en tecnologías front-end.", $escaped = true);
 
-            $response = $this->get("/proyectos/show/2");
+            $response = $this->get("/curriculos/show/1");
 
             $response
-            ->assertSeeText('Electrónica', $escaped = true);
+            ->assertSeeText("Habilidades avanzadas en HTML, CSS y JavaScript.", $escaped = true);
 
-            $response = $this->get("/proyectos/show/A");
+            $response = $this->get("/curriculos/show/A");
             $response->assertNotFound();
 
         /**
-         * proyectos create test.
+         * curriculos create test.
          */
-            $value = 'Añadir proyecto';
-            $response = $this->get('/proyectos/create');
+            $value = 'Añadir Currículum';
+            $response = $this->get('/curriculos/create');
 
             $response
             ->assertStatus(200)
-            ->assertViewIs('proyectos.create')
+            ->assertViewIs('curriculos.create')
             ->assertSeeText($value, $escaped = true);
 
         /**
-         * proyectos edit test.
+         * curriculos edit test.
          */
             $id = rand(1, 10);
-            $value = "Modificar proyecto";
-            $response = $this->get("/proyectos/edit/$id");
+            $value = "Modificar Currículum";
+            $response = $this->get("/curriculos/edit/$id");
 
             $response
             ->assertStatus(200)
-            ->assertViewIs('proyectos.edit')
+            ->assertViewIs('curriculos.edit')
             ->assertSeeText($value, $escaped = true);
 
-            $response = $this->get("/proyectos/edit/A");
+            $response = $this->get("/curriculos/edit/A");
             $response->assertNotFound();
 
         /**

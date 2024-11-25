@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProyectosController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('proyectos', [ProyectosController::class, 'getIndex']);
 
