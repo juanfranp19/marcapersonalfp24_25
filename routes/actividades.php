@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActividadController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('actividades', [ActividadController::class, 'getIndex']);
 
