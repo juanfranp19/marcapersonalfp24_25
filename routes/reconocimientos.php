@@ -3,7 +3,7 @@
 use App\Http\Controllers\ReconocimientoController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'reconocimientos'], function() {
+Route::group(['prefix' => 'reconocimientos'], function(){
 
     Route::get('/', [ReconocimientoController::class, 'getIndex']);
     Route::get('/show/{id}', [ReconocimientoController::class, 'getShow']) ->where('id', '[0-9]+');

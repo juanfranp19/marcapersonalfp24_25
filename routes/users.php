@@ -2,7 +2,7 @@
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'users', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'users'], function(){
 
     Route::get('/', [UserController::class, 'getIndex']);
     Route::get('/show/{id}', [UserController::class, 'getShow'])->where('id', '[0-9]*');

@@ -3,7 +3,7 @@
 use App\Http\Controllers\CurriculoController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'curriculos'], function() {
+Route::group(['prefix' => 'curriculos'], function(){
 
     Route::get('/', [CurriculoController::class, 'getIndex']);
     Route::get('/show/{id}', [CurriculoController::class, 'getShow'])
