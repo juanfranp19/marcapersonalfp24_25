@@ -63,14 +63,14 @@ class ProyectoControllerTest extends TestCase
         /**
          * proyectos show test.
          */
-            $response = $this->get("/proyectos/show/1");
+            $response = $this->get("/proyectos/show/2");
 
             $response
             ->assertStatus(200)
             ->assertViewIs('proyectos.show')
             ->assertSeeText('Diseño Gráfico', $escaped = true);
 
-            $response = $this->get("/proyectos/show/2");
+            $response = $this->get("/proyectos/show/3");
 
             $response
             ->assertSeeText('Electrónica', $escaped = true);
