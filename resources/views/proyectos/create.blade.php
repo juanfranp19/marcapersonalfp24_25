@@ -10,7 +10,7 @@
          </div>
          <div class="card-body" style="padding:30px">
 
-            <form action="{{ url('/proyectos/create') }}" method="POST">
+            <form action="{{ action([\App\Http\Controllers\ProyectosController::class, 'store']) }}" method="POST">
 
 	            @csrf
 

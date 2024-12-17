@@ -13,7 +13,7 @@
          </div>
          <div class="card-body" style="padding:30px">
 
-            <form action="{{ action([App\Http\Controllers\ProyectosController::class, 'getEdit'], ['id' => $id]) }}" method="POST">
+            <form action="{{ action([\App\Http\Controllers\ProyectosController::class, 'putEdit'], ['id' => $proyecto->id]) }}" method="POST">
                 @method('PUT')
 	            @csrf
 
