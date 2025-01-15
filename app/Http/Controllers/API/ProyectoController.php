@@ -88,7 +88,7 @@ class ProyectoController extends Controller
 
             return response()->json([
                 'message' => 'Proyecto eliminado correctamente'
-            ], 200);
+            ], 204);
 
         } catch (\Exception $e) {
             return response()->json([
