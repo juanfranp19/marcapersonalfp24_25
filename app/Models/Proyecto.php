@@ -13,4 +13,9 @@ class Proyecto extends Model
         'metadatos',
         'ciclo_id'
     ];
+
+    public function setMetadatosAttribute($value)
+    {
+        $this->attributes['metadatos'] = json_encode($value);
+    }
 }
