@@ -10,6 +10,8 @@ use PhpParser\Node\Stmt\TryCatch;
 
 class ProyectoController extends Controller
 {
+    public $modelclass = Proyecto::class;
+
     /**
      * Display a listing of the resource.
      */

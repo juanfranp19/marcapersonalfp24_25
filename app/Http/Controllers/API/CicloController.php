@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 
 class CicloController extends Controller
 {
+    public $modelclass = Ciclo::class;
+
     /**
      * Display a listing of the resource.
      */

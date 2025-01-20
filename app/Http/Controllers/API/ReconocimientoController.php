@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 
 class ReconocimientoController extends Controller
 {
+    public $modelclass = Reconocimiento::class;
+
     /**
      * Display a listing of the resource.
      */
