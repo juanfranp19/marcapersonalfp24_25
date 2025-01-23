@@ -21,9 +21,18 @@ class User extends Authenticatable
         'name',
         'nombre',
         'apellidos',
-        'email',
-        'password',
+        'email'
     ];
+
+    public static function getFillableAttributes()
+    {
+        return (new static)->getFillable();
+    }
+
+    public function getFillable()
+    {
+        return $this->fillable;
+    }
 
     /**
      * The attributes that should be hidden for serialization.

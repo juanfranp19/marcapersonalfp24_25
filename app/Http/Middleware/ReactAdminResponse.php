@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Helpers\FilterHelper;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-
 use function Termwind\parse;
 
 class ReactAdminResponse
@@ -29,6 +29,19 @@ class ReactAdminResponse
             abort_unless(property_exists($request->route()->controller, 'modelclass'), 500, "It must exists a modelclass property in the controller.");
             $modelClassName = $request->route()->controller->modelclass;
             $response->header('X-Total-Count', $modelClassName::count());
+
+            //echo $modelClassName->getFillable();
+            $fillable = $modelClassName::getFillableAttributes();
+            $query = FilterHelper::applyFilter($request, $fillable);
+            $query = FilterHelper::applySort($request, $query);
+            // Ejecuta la query y obtiene los resultados
+            //$results = $query->get();
+
+            // Añade los resultados a la response
+            //$response->setData($results);
+
+            $response = $modelClassName::collection($query);
+
         }
         try {
             if (is_callable([$response, 'getData'])) {
@@ -41,4 +54,32 @@ class ReactAdminResponse
         }
         return $response;
     }
+
+    /* public static function applyFilter($request, $filterColumns)
+    {
+        $modelClassName = $request->route()->controller->modelclass;
+        $query = $modelClassName::query();
+
+        $filterValue = $request->q;
+
+        if ($filterValue) {
+            $query->where(function ($query) use ($filterValue, $filterColumns) {
+                foreach ($filterColumns as $column) {
+                    $query->orWhere($column, 'like', '%' . $filterValue . '%');
+                }
+            });
+        }
+
+
+
+        return $query;
+    }
+
+    public static function applySort($request, $query)
+    {
+        return (
+            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
+            ->paginate($request->perPage)
+        );
+    } */
 }

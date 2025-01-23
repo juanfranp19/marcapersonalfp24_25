@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public $modelclass = User::class;
     /**
      * Display a listing of the resource.
      */

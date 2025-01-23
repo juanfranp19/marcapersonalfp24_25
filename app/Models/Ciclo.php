@@ -9,7 +9,7 @@ class Ciclo extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
+    public static $fillable = [
         'id',
         'codCiclo',
         'codFamilia',
