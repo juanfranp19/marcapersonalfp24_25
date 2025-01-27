@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Ciclo;
 use App\Models\Proyecto;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +23,9 @@ class DatabaseSeeder extends Seeder
         // llamadas a otros ficheros de seed
         $this->call(ActividadesTableSeeder::class);
         $this->command->info('Tabla actividades inicializada con datos!');
+
         $this->call(CiclosTableSeeder::class);
+
         $this->call(CurriculosTableSeeder::class);
         $this->command->info('Tabla curriculos inicializada con datos!');
         $this->call(FamiliasProfesionalesTableSeeder::class);
@@ -40,14 +43,19 @@ class DatabaseSeeder extends Seeder
     {
         Proyecto::truncate();
 
+        $ciclos = Ciclo::all();
+
         foreach (self::$arrayProyectos as $proyecto) {
             $p = new Proyecto;
             $p->docente_id = $proyecto['docente_id'];
             $p->nombre = $proyecto['nombre'];
             $p->dominio = $proyecto['dominio'];
             $p->metadatos = serialize($proyecto['metadatos']);
+            $p->ciclo_id = ($ciclos->isNotEmpty()) ?? $p->ciclos()->attach($ciclos->random()->id);
             $p->save();
         }
+
+
     }
     private static $arrayProyectos = [
         [

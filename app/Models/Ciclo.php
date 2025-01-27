@@ -19,4 +19,9 @@ class Ciclo extends Model
     ];
 
     public static $filterColumns = ['codCiclo', 'codFamilia', 'grado', 'nombre'];
+
+    public function proyectos()
+    {
+        return $this->belongsToMany(Proyecto::class, 'proyectos_ciclos', 'proyecto_id', 'ciclo_id');
+    }
 }
