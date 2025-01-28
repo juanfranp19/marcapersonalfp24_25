@@ -2,12 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Http\Controllers\ProyectoCicloController;
-use App\Models\Ciclo;
-use App\Models\Proyecto;
-use Illuminate\Container\Attributes\DB;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ProyectosCiclosSeeder extends Seeder
 {
@@ -16,18 +12,18 @@ class ProyectosCiclosSeeder extends Seeder
      */
     public function run(): void
     {
-        // Truncar la tabla pivote para empezar desde cero
-        ProyectoCiclo::truncate();
+        DB::table('proyectos_ciclos')->truncate();
 
-        // Obtener todos los proyectos y ciclos
-        $proyectos = Proyecto::all();
-        $ciclos = Ciclo::all();
+        $ciclos = DB::table('ciclos')->get();
+        $proyectos = DB::table('proyectos')->get();
 
-        // Asociar proyectos con ciclos
-        foreach ($proyectos as $proyecto) {
-            // Asocia un ciclo aleatorio a cada proyecto
-            if ($ciclos->isNotEmpty()) {
-                $proyecto->ciclos()->attach($ciclos->random()->id);
+        foreach ($ciclos as $ciclo) {
+
+            foreach ($proyectos as $proyecto) {
+                DB::table('proyectos_ciclos')->insert([
+                    'proyecto_id' => $proyecto->id,
+                    'ciclo_id' => $ciclo->id
+                ]);
             }
         }
 

@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('proyectos_ciclos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('proyecto_id')->constrained()->onDelete('cascade');
-            $table->foreignId('ciclo_id')->constrained()->onDelete('cascade');
-            $table->unique(['proyecto_id', 'ciclo_id']);
-            $table->timestamps();
+            $table->unsignedBigInteger('ciclo_id')->nullable(false);
+            $table->unsignedBigInteger('proyecto_id')->nullable(false);
+
+            $table->foreign('ciclo_id')->references('id')->on('ciclos')->onDelete('cascade');
+            $table->foreign('proyecto_id')->references('id')->on('proyectos')->onDelete('cascade');
         });
     }
 
