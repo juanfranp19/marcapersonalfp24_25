@@ -22,6 +22,12 @@ class EmpresaController extends Controller
         return EmpresaResource::collection($query->paginate($request->perPage));
     }
 
+    public function default(Request $request)
+    {
+        return response()->json(['count' => Empresa::count()]);
+    }
+
+
     /**
      * Store a newly created resource in storage.
      */

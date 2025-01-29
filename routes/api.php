@@ -41,7 +41,10 @@ Route::prefix('v1')->group(function () {
     Route::get('proyectos/{proyectoId}/ciclos', [ProyectosCiclosController::class, 'indexProyectosCiclos']);
     Route::get('ciclos/{cicloId}/proyectos', [ProyectosCiclosController::class, 'indexCiclosProyectos']);
     Route::post('proyectos/{proyectoId}/ciclos', [ProyectosCiclosController::class, 'storeProyectoCiclo']);
+
     Route::apiResource('empresas', EmpresaController::class);
+    Route::get('empresas/count', [EmpresaController::class, 'default']);
+
 });
 
 Route::any('/{any}', function (ServerRequestInterface $request) {
