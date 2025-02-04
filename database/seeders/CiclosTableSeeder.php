@@ -21,6 +21,7 @@ class CiclosTableSeeder extends Seeder
                 'codCiclo' => $ciclo['codCiclo'],
                 'codFamilia' => $ciclo['codFamilia'],
                 // 'familia_id' => array_search($ciclo['codFamilia'], $codigosFamilias) + 1,
+                'familia_id' => DB::table('familias_profesionales')->where('codigo', $ciclo['codFamilia'])->firstOrFail()->id,
                 'grado' => $ciclo['grado'],
                 'nombre' => $ciclo['nombre'],
             ]);
