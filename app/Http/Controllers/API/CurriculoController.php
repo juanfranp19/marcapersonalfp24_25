@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CurriculoResource;
 use App\Models\Curriculo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class CurriculoController extends Controller
 {
@@ -47,6 +48,8 @@ class CurriculoController extends Controller
      */
     public function update(Request $request, Curriculo $curriculo)
     {
+        abort_if (! Gate::allows('update-curriculo', $curriculo), 403);
+
         $curriculoData = json_decode($request->getContent(), true);
         $curriculo->update($curriculoData);
 
