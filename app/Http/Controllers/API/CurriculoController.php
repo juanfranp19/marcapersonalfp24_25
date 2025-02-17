@@ -47,6 +47,8 @@ class CurriculoController extends Controller
      */
     public function update(Request $request, Curriculo $curriculo)
     {
+        abort_if ($request->user()->cannot('update', $curriculo), 403);
+
         $curriculoData = json_decode($request->getContent(), true);
         $curriculo->update($curriculoData);
 

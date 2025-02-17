@@ -33,7 +33,8 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('familias_profesionales', FamiliaProfesionalController::class)->parameters([
         'familias_profesionales' => 'familiaProfesional'
     ]);
-    Route::apiResource('curriculos', CurriculoController::class);
+    Route::apiResource('curriculos', CurriculoController::class)
+        ->middleware(['auth:sanctum']);
     Route::apiResource('users', UserController::class);
     Route::apiResource('proyectos', ProyectoController::class);
     Route::apiResource('reconocimientos', ReconocimientoController::class);
