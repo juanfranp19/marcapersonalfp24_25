@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Testing\Fluent\Concerns\Has;
 
 class Administrador extends Model
@@ -17,10 +18,11 @@ class Administrador extends Model
 
     public static $filterColumns = ['user_id'];
 
-    public function user()
+    public function user(): HasOne
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::class);
     }
 
     protected $table = 'administradores';
+    public $timestamps = false;
 }

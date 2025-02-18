@@ -22,10 +22,10 @@ class AdministradoresTableSeeder extends Seeder
 
         for ($i = 0; $i < $numAdmins; $i++) {
             $admin = new Administrador();
-            $randomUser = $users->random()->id;
+            $randomUserId = $users->random()->id;
 
-            if (!Administrador->where('user_id', $randomUser)->exists()) {
-                $admin->user_id = $randomUser;
+            if (!Administrador::where('user_id', $randomUserId)->exists()) {
+                $admin->user_id = $randomUserId;
 
                 try {
                     $admin->save();

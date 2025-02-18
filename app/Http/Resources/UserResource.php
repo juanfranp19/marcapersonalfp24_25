@@ -5,6 +5,8 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+use function PHPUnit\Framework\isEmpty;
+
 class UserResource extends JsonResource
 {
     /**
@@ -14,6 +16,13 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $admin = $this->administradores;
+        unset($admin['user_id']);
+
+        if ($admin == null) {
+            $admin = false;
+        }
+
         return array_merge(
             parent::toArray($request),
             ['actividades_estudiante' => $this->actividadesComoEstudiante],
@@ -22,7 +31,7 @@ class UserResource extends JsonResource
             ['curriculo' => $this->curriculo],
             ['ciclos' => $this->ciclos],
             ['proyectos' => $this->proyectos],
-            ['admin' => $this->isAdministrator]
+            ['admin' => $admin]
         );
     }
 }
