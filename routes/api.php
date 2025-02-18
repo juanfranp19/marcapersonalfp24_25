@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\ActividadController;
+use App\Http\Controllers\API\AdministradorController;
 use App\Http\Controllers\API\CicloController;
 use App\Http\Controllers\API\CompetenciaController;
 use App\Http\Controllers\API\CurriculoController;
@@ -42,6 +43,7 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('users_ciclos', UsersCiclosController::class);
     Route::apiResource('competencias', CompetenciaController::class);
     Route::apiResource('idiomas', IdiomaController::class);
+    Route::apiResource('administradores', AdministradorController::class);
     Route::get('proyectos/{proyectoId}/ciclos', [ProyectosCiclosController::class, 'indexProyectosCiclos']);
     Route::get('ciclos/{cicloId}/proyectos', [ProyectosCiclosController::class, 'indexCiclosProyectos']);
     Route::post('proyectos/{proyectoId}/ciclos', [ProyectosCiclosController::class, 'storeProyectoCiclo']);

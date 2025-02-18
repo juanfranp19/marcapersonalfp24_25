@@ -21,7 +21,8 @@ class UserResource extends JsonResource
             ['competencias' => $this->competencias],
             ['curriculo' => $this->curriculo],
             ['ciclos' => $this->ciclos],
-            ['proyectos' => $this->proyectos]
+            ['proyectos' => $this->proyectos],
+            ['admin' => $this->isAdministrator]
         );
     }
 }

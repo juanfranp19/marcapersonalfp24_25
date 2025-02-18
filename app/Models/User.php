@@ -87,8 +87,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Proyecto::class, 'participantes_proyectos', 'user_id', 'proyecto_id');
     }
 
+    public function administradores(): BelongsToMany
+    {
+        return $this->belongsToMany(Administrador::class, 'administradores', 'user_id', 'id');
+    }
+
     public function isAdministrator(): bool
     {
-        return $this->email === env('ADMIN_EMAIL');
+        return Administrador::where('user_id', $this->id)->exists();
     }
 }
