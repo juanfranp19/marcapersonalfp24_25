@@ -87,14 +87,36 @@ class User extends Authenticatable
         return $this->belongsToMany(Proyecto::class, 'participantes_proyectos', 'user_id', 'proyecto_id');
     }
 
-    public function isAdministrator(): bool
-    {
-        return $this->email === env('ADMIN_EMAIL');
-    }
-
     public function idiomas(): BelongsToMany
     {
         return $this->belongsToMany(Idiomas::class, 'user_idiomas', 'user_id', 'idioma_id')
             ->withPivot('nivel', 'certificado');
+    }
+
+    // Gestión de roles
+    public function esAdmin(): bool
+    {
+        return $this->email === env('ADMIN_EMAIL');
+    }
+
+    public function esDocente(): bool
+    {
+        return $this->getEmailDomain() === env('TEACHER_EMAIL_DOMAIN');
+    }
+
+    public function esEstudiante(): bool
+    {
+        return $this->getEmailDomain() === env('STUDENT_EMAIL_DOMAIN');
+    }
+
+    public function esPropietario($recurso, $propiedad = 'user_id'): bool
+    {
+        return $recurso && $recurso->$propiedad === $this->id;
+    }
+
+    private function getEmailDomain(): string
+    {
+        $dominio = explode('@', $this->email)[1];
+        return $dominio;
     }
 }
