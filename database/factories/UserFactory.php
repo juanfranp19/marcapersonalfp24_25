@@ -25,9 +25,9 @@ class UserFactory extends Factory
     {
         $nombre = fake()->firstName();
         $apellidos = fake()->lastName();
-        $name = "$nombre $apellidos";
         return [
-            'name' => $this->faker->unique()->numberBetween(1111111, 9999999),
+            'name' => fake()->unique()->userName(),
+            //'name' =>fake()->unique()->numberBetween(1111111, 9999999),
             'nombre' => $nombre,
             'apellidos' => $apellidos,
             'email' => fake()->unique()->safeEmail(),
