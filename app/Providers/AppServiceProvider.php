@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
             return config('app.frontend_url')."/password-reset/$token?email={$notifiable->getEmailForPasswordReset()}";
         });
         Gate::before(function (User $user, string $ability) {
-            if ($user->isAdministrator()) {
+            if ($user->esAdmin()) {
                 return true;
             }
         });
