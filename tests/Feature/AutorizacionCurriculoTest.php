@@ -125,7 +125,11 @@ class AutorizacionCurriculoTest extends TestCase
 
     public function test_estudiante_can_CRUD_curriculo_if_owner()
     {
-        $estudiante = User::where('email', 'like', '%@' . env('STUDENT_EMAIL_DOMAIN'))->first();
+        $estudiante = User::where([
+                ['email', 'like', '%@' . env('STUDENT_EMAIL_DOMAIN')],
+                ['email', '!=', env('ADMIN_EMAIL')],
+            ])->first();
+
         $this->actingAs($estudiante);
 
         $response = $this->curriculoIndex();

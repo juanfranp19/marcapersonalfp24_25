@@ -6,11 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ActividadResource;
 use App\Models\Actividad;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
-class ActividadController extends Controller
+class ActividadController extends Controller implements HasMiddleware
 {
     public $modelclass = Actividad::class;
+
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('auth:sanctum', except: ['index', 'show']),
+        ];
+    }
 
     /**
      * Display a listing of the resource.
@@ -28,7 +38,13 @@ class ActividadController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Actividad::class);
+
         $actividad = json_decode($request->getContent(), true);
+
+        if (!$request->user()->esAdmin()) {
+            $actividad['id'] = $request->user()->id;
+        }
 
         $actividad = Actividad::create($actividad);
 
@@ -48,6 +64,8 @@ class ActividadController extends Controller
      */
     public function update(Request $request, Actividad $actividad)
     {
+        Gate::authorize('update', $actividad);
+
         $actividadData = json_decode($request->getContent(), true);
 
         $actividad->update($actividadData);
@@ -60,6 +78,8 @@ class ActividadController extends Controller
      */
     public function destroy(Actividad $actividad)
     {
+        Gate::authorize('delete', $actividad);
+
         try {
             $actividad->delete();
             return response()->json(null, 204);
