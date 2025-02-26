@@ -52,6 +52,8 @@ class CicloController extends Controller
      */
     public function update(Request $request, Ciclo $ciclo)
     {
+        Gate::authorize('update', Ciclo::class);
+
         $cicloData = json_decode($request->getContent(), true);
         $ciclo->update($cicloData);
 
@@ -63,6 +65,7 @@ class CicloController extends Controller
      */
     public function destroy(Ciclo $ciclo)
     {
+        Gate::authorize('delete', Ciclo::class);
         try {
             $ciclo->delete();
             return response()->json(null, 204);
