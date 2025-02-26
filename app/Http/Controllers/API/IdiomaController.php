@@ -6,10 +6,25 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\IdiomaResource;
 use App\Models\Idiomas;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class IdiomaController extends Controller
+class IdiomaController extends Controller implements HasMiddleware
 {
     public $modelclass = Idiomas::class;
+
+
+        /**
+     * Get the middleware that should be assigned to the controller.
+     */
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('auth:sanctum', except: ['index', 'show']),
+        ];
+    }
+
+
 
     /**
      * Display a listing of the resource.
