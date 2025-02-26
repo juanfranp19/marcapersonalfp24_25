@@ -5,11 +5,21 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EmpresaResource;
 use App\Models\Empresa;
+use GuzzleHttp\Middleware;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class EmpresaController extends Controller
+class EmpresaController extends Controller implements HasMiddleware
 {
     public $modelclass = Empresa::class;
+
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('auth:sanctum', except: ['index', 'show']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -27,7 +37,13 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Empresa::class);
+
         $empresa = json_decode($request->getContent(), true);
+
+        if (!$request->user()->esAdmin()) {
+            $curriculo['user_id'] = $request->user()->id;
+        }
 
         $empresa = Empresa::create($empresa);
 
@@ -47,6 +63,8 @@ class EmpresaController extends Controller
      */
     public function update(Request $request, Empresa $empresa)
     {
+        Gate::authorize('update', $empresa);
+
         $empresaData = json_decode($request->getContent(), true);
         $empresa->update($empresaData);
 
@@ -58,6 +76,8 @@ class EmpresaController extends Controller
      */
     public function destroy(Empresa $empresa)
     {
+        Gate::authorize('delete', $empresa);
+
         try {
             $empresa->delete();
             return response()->json(null, 204);

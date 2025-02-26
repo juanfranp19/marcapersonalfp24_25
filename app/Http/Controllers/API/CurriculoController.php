@@ -43,9 +43,11 @@ class CurriculoController extends Controller implements HasMiddleware
         Gate::authorize('create', Curriculo::class);
 
         $curriculo = json_decode($request->getContent(), true);
+
         if (!$request->user()->esAdmin()) {
             $curriculo['user_id'] = $request->user()->id;
         }
+        
         $curriculo = Curriculo::create($curriculo);
 
         return new CurriculoResource($curriculo);
