@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CicloResource;
 use App\Models\Ciclo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class CicloController extends Controller
 {
@@ -29,6 +30,8 @@ class CicloController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Ciclo::class);
+
         $ciclo = json_decode($request->getContent(), true);
 
         $ciclo = Ciclo::create($ciclo);
