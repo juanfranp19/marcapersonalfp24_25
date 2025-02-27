@@ -43,7 +43,7 @@ class ActividadController extends Controller implements HasMiddleware
         $actividad = json_decode($request->getContent(), true);
 
         if (!$request->user()->esAdmin()) {
-            $actividad['id'] = $request->user()->id;
+            $actividad['docente_id'] = $request->user()->id;
         }
 
         $actividad = Actividad::create($actividad);

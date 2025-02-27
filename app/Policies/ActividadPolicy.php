@@ -37,7 +37,7 @@ class ActividadPolicy
      */
     public function update(User $user, Actividad $actividad): bool
     {
-        return $user->esPropietario($actividad);
+        return $user->esPropietario($actividad, 'docente_id');
     }
 
     /**
