@@ -8,6 +8,7 @@ use App\Models\FamiliaProfesional;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Gate;
 
 class FamiliaProfesionalController extends Controller implements HasMiddleware
 {
@@ -40,6 +41,7 @@ class FamiliaProfesionalController extends Controller implements HasMiddleware
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', FamiliaProfesional::class);
         if ($request->user()->esAdmin()) {
             $familiaProfesional = json_decode($request->getContent(), true);
 
@@ -63,6 +65,7 @@ class FamiliaProfesionalController extends Controller implements HasMiddleware
      */
     public function update(Request $request, FamiliaProfesional $familiaProfesional)
     {
+        Gate::authorize('update', $familiaProfesional);
         if ($request->user()->esAdmin()) {
             $familiaProfesionalData = json_decode($request->getContent(), true);
             $familiaProfesional->update($familiaProfesionalData);
@@ -76,6 +79,7 @@ class FamiliaProfesionalController extends Controller implements HasMiddleware
      */
     public function destroy(FamiliaProfesional $familiaProfesional)
     {
+        Gate::authorize('delete', $familiaProfesional);
         try {
             $familiaProfesional->delete();
             return response()->json(null, 204);
