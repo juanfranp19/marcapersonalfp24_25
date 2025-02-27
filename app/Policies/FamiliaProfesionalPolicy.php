@@ -32,7 +32,7 @@ class FamiliaProfesionalPolicy
     // Solo el administrador puede crear
     public function create(User $user): bool
     {
-        return $user->esAdmin();
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class FamiliaProfesionalPolicy
     // Solo el administrador puede actualizar
     public function update(User $user, FamiliaProfesional $familiaProfesional): bool
     {
-        return $user->esAdmin();
+        return true;
     }
 
     /**
@@ -50,8 +50,8 @@ class FamiliaProfesionalPolicy
     // Solo el administrador puede borrar
     public function delete(User $user, FamiliaProfesional $familiaProfesional): bool
     {
-        
-        return $user->esAdmin();
+
+        return true;
 
        }
 

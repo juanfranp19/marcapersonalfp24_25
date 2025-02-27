@@ -29,9 +29,6 @@ class AutorizacionFamiliaProfesionalTest extends TestCase
 
     public function familiaProfesionalStore() : TestResponse
     {
-        // if (!Auth::check()) {
-        //     return response()->json(['message' => 'Unauthorized'], 403);
-        // }
 
         $data = [
             'id' => FamiliaProfesional::max('id') + 1,
@@ -43,6 +40,7 @@ class AutorizacionFamiliaProfesionalTest extends TestCase
 
         public function familiaProfesionalUpdate() : TestResponse
         {
+            
         $familiaprofesional = FamiliaProfesional::inRandomOrder()->first();
         $data = [
             'id' => $familiaprofesional->id,
@@ -52,18 +50,12 @@ class AutorizacionFamiliaProfesionalTest extends TestCase
         return $this->putJson(self::$apiurl_familiaprofesional . "/{$familiaprofesional->id}", $data);
         }
 
-    public function familiaProfesionalDelete() : TestResponse
+    public function familiaProfesionalDelete($propio = false) : TestResponse
     {
-        $familiaprofesional = FamiliaProfesional::inRandomOrder()->first();
-
-        if (!$familiaprofesional) {
-            $familiaprofesional = FamiliaProfesional::create([
-                'id' => $familiaprofesional->id,
-                'codigo' => 'INF',
-                'nombre' => 'Informática',
-            ]);
-        }
-        return $this->delete(self::$apiurl_familiaprofesional . "/{$familiaprofesional->id}");
+        $familiaProfesional = $propio
+        ? FamiliaProfesional::create(['codigo' => "ABC", 'nombre' => "Familia Test"])
+        : FamiliaProfesional::inRandomOrder()->first();
+        return $this->delete(self::$apiurl_familiaprofesional . "/{$familiaProfesional->id}");
     }
 
     public function test_anonymous_can_access_familiasprofesionales_list_and_view()
@@ -104,7 +96,7 @@ class AutorizacionFamiliaProfesionalTest extends TestCase
         $response = $this->familiaProfesionalUpdate();
         $response->assertSuccessful();
 
-        $response = $this->familiaProfesionalDelete();
+        $response = $this->familiaProfesionalDelete($propio = true);
         $response->assertSuccessful();
 
     }
