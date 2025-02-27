@@ -29,7 +29,7 @@ class EmpresasPolicy
      */
     public function create(User $user): bool
     {
-        return $user->esEstudiante();
+        return $user->esDocente();
     }
 
     /**
@@ -37,7 +37,7 @@ class EmpresasPolicy
      */
     public function update(User $user, Empresa $empresa): bool
     {
-        return $user->esPropietario($empresa);
+        return $user->esDocente();
     }
 
     /**

@@ -41,8 +41,8 @@ class EmpresaController extends Controller implements HasMiddleware
 
         $empresa = json_decode($request->getContent(), true);
 
-        if (!$request->user()->esAdmin()) {
-            $curriculo['user_id'] = $request->user()->id;
+        if (!$request->user()->esDocente()) {
+            $empresa['user_id'] = $request->user()->id;
         }
 
         $empresa = Empresa::create($empresa);
