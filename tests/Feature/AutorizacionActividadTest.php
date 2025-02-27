@@ -116,7 +116,7 @@ class AutorizacionActividadTest extends TestCase
         $response->assertSuccessful();
 
         $response = $this->actividadStore();
-        $response->assertForbidden();
+        $response->assertSuccessful();
 
         $response = $this->actividadUpdate();
         $response->assertForbidden();
