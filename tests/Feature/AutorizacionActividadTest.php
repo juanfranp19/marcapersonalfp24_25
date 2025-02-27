@@ -14,7 +14,7 @@ class AutorizacionActividadTest extends TestCase
 {
     // use RefreshDatabase;
 
-    private static $apiurl_actividad = '/api/v1/actividad';
+    private static $apiurl_actividad = '/api/v1/actividades';
 
     public function actividadIndex() : TestResponse
     {
@@ -113,7 +113,7 @@ class AutorizacionActividadTest extends TestCase
         $response->assertSuccessful();
 
         $response = $this->actividadStore();
-        $response->assertForbidden();
+        $response->assertSuccessful();
 
         $response = $this->actividadUpdate();
         $response->assertForbidden();
@@ -135,7 +135,7 @@ class AutorizacionActividadTest extends TestCase
         $response->assertSuccessful();
 
         $response = $this->actividadStore();
-        $response->assertSuccessful();
+        $response->assertForbidden();
 
         $response = $this->actividadUpdate($propio = true);
         $response->assertSuccessful();
