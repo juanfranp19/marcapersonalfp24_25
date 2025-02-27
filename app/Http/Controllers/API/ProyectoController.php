@@ -7,10 +7,11 @@ use App\Http\Resources\ProyectoResource;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Support\Facades\Gate;
 use PhpParser\Node\Stmt\TryCatch;
 
-class ProyectoController extends Controller
+class ProyectoController extends Controller implements HasMiddleware
 {
 
     public static function middleware(): array
