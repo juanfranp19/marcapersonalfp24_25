@@ -7,7 +7,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
-use App\Models\Curriculo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Testing\TestResponse;
 
@@ -128,7 +127,10 @@ class AutorizacionCicloTest extends TestCase
 
     public function test_estudiante_can_access_ciclo_list_and_view()
     {
-        $estudiante = User::where('email', 'like', '%@' . env('STUDENT_EMAIL_DOMAIN'))->first();
+        $estudiante = User::where([
+            ['email', 'like', '%@' . env('STUDENT_EMAIL_DOMAIN')],
+            ['email', '!=', env('ADMIN_EMAIL')],
+        ])->first();
         $this->actingAs($estudiante);
 
         $response = $this->cicloIndex();

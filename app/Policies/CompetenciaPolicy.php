@@ -2,10 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\Ciclo;
+use App\Models\Competencia;
 use App\Models\User;
 
-class CicloPolicy
+class CompetenciaPolicy
 {
     /**
      * Create a new policy instance.
@@ -18,7 +18,7 @@ class CicloPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(?User $user, Ciclo $ciclo): bool
+    public function view(?User $user, Competencia $ciclo): bool
     {
         return true;
     }
@@ -34,7 +34,7 @@ class CicloPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Ciclo $ciclo): bool
+    public function update(User $user, Competencia $ciclo): bool
     {
         return false;
     }
@@ -42,7 +42,7 @@ class CicloPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Ciclo $ciclo): bool
+    public function delete(User $user, Competencia $ciclo): bool
     {
         return false;
     }
@@ -50,7 +50,7 @@ class CicloPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Ciclo $ciclo): bool
+    public function restore(User $user, Competencia $ciclo): bool
     {
         return false;
     }
@@ -58,7 +58,7 @@ class CicloPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Ciclo $ciclo): bool
+    public function forceDelete(User $user, Competencia $ciclo): bool
     {
         return false;
     }
