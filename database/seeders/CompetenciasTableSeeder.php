@@ -15,16 +15,36 @@ class CompetenciasTableSeeder extends Seeder
     {
         Competencia::truncate();
 
-        if(Competencia::count() == 0) {
-            if(config('app.env') ==='local'){
-                Competencia::factory(10)->create();
-                // Competencia::factory()->create([
-                // 'nombre' => 'Prueba Nombre',
-                // 'color' => 'colorPrueba'
+        if (config('app.env') === 'local') {
+            //Competencia::factory(10)->create();
 
-                // ]);
-            }
+            foreach (self::$arrayCompetencias as $competencia) {
+                Competencia::factory()->create([
+                    'nombre' => $competencia['nombre'],
+                    'color' => fake()->hexColor()
+                ]);
+            };
         }
     }
 
+    private static $arrayCompetencias = [
+        [
+            'nombre' => 'Comunicación',
+        ],
+        [
+            'nombre' => 'Inteligencia emocional',
+        ],
+        [
+            'nombre' => 'Pensamiento crítico',
+        ],
+        [
+            'nombre' => 'Responsabilidad',
+        ],
+        [
+            'nombre' => 'Gestión del cambio',
+        ],
+        [
+            'nombre' => 'Creatividad',
+        ],
+    ];
 }
