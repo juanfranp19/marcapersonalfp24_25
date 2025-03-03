@@ -9,6 +9,7 @@ use App\Models\Curriculo;
 use App\Models\Empresa;
 use App\Models\FamiliaProfesional;
 use App\Models\Idiomas;
+use App\Models\Proyecto;
 use App\Models\User;
 use App\Policies\ActividadPolicy;
 use App\Policies\CicloPolicy;
@@ -17,6 +18,7 @@ use App\Policies\CurriculoPolicy;
 use App\Policies\EmpresasPolicy;
 use App\Policies\FamiliaProfesionalPolicy;
 use App\Policies\IdiomaPolicy;
+use App\Policies\ProyectoPolicy;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -54,5 +56,6 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(Empresa::class, EmpresasPolicy::class);
         Gate::policy(FamiliaProfesional::class, FamiliaProfesionalPolicy::class);
         Gate::policy(Idiomas::class, IdiomaPolicy::class);
+        Gate::policy(Proyecto::class, ProyectoPolicy::class);
     }
 }
