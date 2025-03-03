@@ -30,7 +30,7 @@ class CurriculoPolicy
      */
     public function create(User $user): bool
     {
-        return $user->esEstudiante();
+        return $user->esDocente();
     }
 
     /**
@@ -38,7 +38,7 @@ class CurriculoPolicy
      */
     public function update(User $user, Curriculo $curriculo): bool
     {
-        return $user->esPropietario($curriculo);
+        return $user->esDocente($curriculo);
     }
 
     /**

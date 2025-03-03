@@ -6,11 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CicloResource;
 use App\Models\Ciclo;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Routing\Controllers\Middleware;
 
-class CicloController extends Controller
+class CicloController extends Controller implements HasMiddleware
 {
 
     public $modelclass = Ciclo::class;
+
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('auth:sanctum', except: ['index', 'show']),
+        ];
+    }
 
     /**
      * Display a listing of the resource.
@@ -29,6 +39,8 @@ class CicloController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Ciclo::class);
+
         $ciclo = json_decode($request->getContent(), true);
 
         $ciclo = Ciclo::create($ciclo);
@@ -49,6 +61,8 @@ class CicloController extends Controller
      */
     public function update(Request $request, Ciclo $ciclo)
     {
+        Gate::authorize('update', $ciclo);
+
         $cicloData = json_decode($request->getContent(), true);
         $ciclo->update($cicloData);
 
@@ -60,6 +74,7 @@ class CicloController extends Controller
      */
     public function destroy(Ciclo $ciclo)
     {
+        Gate::authorize('delete', $ciclo);
         try {
             $ciclo->delete();
             return response()->json(null, 204);
