@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import path from "path";
+import laravel from 'laravel-vite-plugin';
 import react from "@vitejs/plugin-react";
 
 const alias = [
@@ -35,11 +36,15 @@ const alias = [
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   plugins: [
+    laravel({
+        input: 'resources/js/app.jsx',
+        refresh: true,
+    }),
     react()
   ],
   define: {
         'process.env': process.env,
-  },
+    },
   server: {
     host: true,
   },
