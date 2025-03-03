@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Ciclo;
+use App\Models\Competencia;
 use App\Models\Curriculo;
 use App\Models\User;
+use App\Policies\CicloPolicy;
+use App\Policies\CompetenciaPolicy;
 use App\Policies\CurriculoPolicy;
 use App\Models\Actividad;
 use App\Policies\ActividadPolicy;
@@ -37,7 +41,9 @@ class AppServiceProvider extends ServiceProvider
                 return true;
             }
         });
-        Gate::policy(Curriculo::class, CurriculoPolicy::class);
         Gate::policy(Actividad::class, ActividadPolicy::class);
+        Gate::policy(Ciclo::class, CicloPolicy::class);
+        Gate::policy(Competencia::class, CompetenciaPolicy::class);
+        Gate::policy(Curriculo::class, CurriculoPolicy::class);
     }
 }

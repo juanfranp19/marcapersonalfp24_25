@@ -6,13 +6,24 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CompetenciaResource;
 use App\Models\Competencia;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Gate;
 
-class CompetenciaController extends Controller
+class CompetenciaController extends Controller implements HasMiddleware
 {
     public $modelclass = Competencia::class;
     /**
      * Display a listing of the resource.
      */
+
+     public static function middleware(): array
+     {
+         return [
+             new Middleware('auth:sanctum', except: ['index', 'show']),
+         ];
+     }
+
     public function index(Request $request)
     {
         return CompetenciaResource::collection(
@@ -25,6 +36,8 @@ class CompetenciaController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Competencia::class);
+
         $competencia = json_decode($request->getContent(), true);
 
         $ciclo = Competencia::create($competencia);
@@ -45,6 +58,8 @@ class CompetenciaController extends Controller
      */
     public function update(Request $request, Competencia $competencia)
     {
+        Gate::authorize('update', $competencia);
+
         $competenciaData = json_decode($request->getContent(), true);
         $competencia->update($competenciaData);
 
@@ -56,6 +71,8 @@ class CompetenciaController extends Controller
      */
     public function destroy(Competencia $competencia)
     {
+        Gate::authorize('delete', $competencia);
+        
         try {
             $competencia->delete();
             return response()->json(null, 204);
