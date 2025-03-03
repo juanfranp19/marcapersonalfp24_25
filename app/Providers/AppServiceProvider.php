@@ -2,15 +2,17 @@
 
 namespace App\Providers;
 
+use App\Models\Actividad;
 use App\Models\Ciclo;
 use App\Models\Competencia;
 use App\Models\Curriculo;
+use App\Models\Empresa;
 use App\Models\User;
+use App\Policies\ActividadPolicy;
 use App\Policies\CicloPolicy;
 use App\Policies\CompetenciaPolicy;
 use App\Policies\CurriculoPolicy;
-use App\Models\Actividad;
-use App\Policies\ActividadPolicy;
+use App\Policies\EmpresasPolicy;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -45,5 +47,6 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(Ciclo::class, CicloPolicy::class);
         Gate::policy(Competencia::class, CompetenciaPolicy::class);
         Gate::policy(Curriculo::class, CurriculoPolicy::class);
+        Gate::policy(Empresa::class, EmpresasPolicy::class);
     }
 }
