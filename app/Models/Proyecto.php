@@ -19,7 +19,7 @@ class Proyecto extends Model
     ];
 
 
-    public static $filterColumns = ['docente_id', 'nombre', 'dominio', 'calificacion', 'url_github'];
+    public static $filterColumns = ['docente_id', 'nombre', 'dominio'];
 
 
     /**
